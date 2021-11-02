@@ -1,6 +1,8 @@
 # Container Scan To SARIF action
 
-This action prints "Hello World" or "Hello" + the name of a person to greet to the log.
+This action converts [Azure Container Scan Action](https://github.com/Azure/container-scan#action-output) output to [Static Analysis Results Interchange Format (SARIF)](https://sarifweb.azurewebsites.net/), for an easier integration with [GitHub Code Scanning](https://docs.github.com/en/code-security/code-scanning/automatically-scanning-your-code-for-vulnerabilities-and-errors/about-code-scanning).
+
+It uses the standalone converter excutable from [container-scan-to-sarif](https://github.com/rm3l/container-scan-to-sarif).
 
 ## Inputs
 
@@ -30,7 +32,7 @@ Path to the SARIF report generated
     
 - name: Convert Container Scan Report to SARIF
   id: container-scan-to-sarif
-  uses: actions/container-scan-to-sarif@v1
+  uses: actions/container-scan-to-sarif-action@v1
   if: ${{ always() }}
   with:
     converter-version: 0.2.2

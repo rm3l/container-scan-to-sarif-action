@@ -1,0 +1,23 @@
+on: [push]
+
+jobs:
+  container-scan-to-sarif_job:
+    runs-on: ubuntu-latest
+    name: A job to convert Container Scan reports to SARIF
+    steps:
+      - name: container-scan-to-sarif action step
+        id: container-scan-to-sarif
+        uses: ./
+        with:
+          converter-version: 0.2.2
+          input-file: 'test-data/sample-container-scan-report.json'
+
+      # Use the output from the `container-scan-to-sarif` step
+      - name: Display the generated SARIF report
+        run: cat "${{ steps.container-scan-to-sarif.outputs.scan-report-path }}"
+
+      - name: Upload SARIF reports to GitHub Security tab
+        uses: github/codeql-action/upload-sarif@v1
+        if: ${{ always() }}
+        with:
+          sarif_file: ${{ steps.container-scan-to-sarif.outputs.scan-report-path }}

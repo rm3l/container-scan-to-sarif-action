@@ -1,4 +1,4 @@
-name: 'container-scan-to-sarif'
+name: 'container-scan-to-sarif-action'
 description: 'Converts Container Scan Action output to SARIF'
 inputs:
   converter-version:
