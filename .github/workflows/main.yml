@@ -8,18 +8,17 @@ jobs:
       - uses: actions/checkout@v2
 
       - name: container-scan-to-sarif action step
-        id: container-scan-to-sarif
+        id: container-scan-to-sarif-step
         uses: ./
         with:
           converter-version: 0.2.2
-          input-file: ${{ github.workspace }}/test-data/sample-container-scan-report.json
+          input-file: test-data/sample-container-scan-report.json
 
-      # Use the output from the `container-scan-to-sarif` step
       - name: Display the generated SARIF report
-        run: cat "${{ steps.container-scan-to-sarif.outputs.sarif-report-path }}"
+        run: cat "${{ steps.container-scan-to-sarif-step.outputs.sarif-report-path }}"
 
       - name: Upload SARIF reports to GitHub Security tab
         uses: github/codeql-action/upload-sarif@v1
         if: ${{ always() }}
         with:
-          sarif_file: ${{ steps.container-scan-to-sarif.outputs.sarif-report-path }}
+          sarif_file: ${{ steps.container-scan-to-sarif-step.outputs.sarif-report-path }}
