@@ -1,0 +1,20 @@
+name: 'container-scan-to-sarif'
+description: 'Converts Container Scan Action output to SARIF'
+inputs:
+  converter-version:
+    description: 'Version of the container-scan-to-sarif tool. See https://github.com/rm3l/container-scan-to-sarif/releases'
+    required: false
+    default: '0.2.2'
+  input-file:
+    description: 'Path to the input Container Scan report to convert'
+    required: true
+    default: 'scanreport.json'
+outputs:
+  sarif-report-path:
+    description: 'Path to the SARIF report generated'
+runs:
+  using: 'docker'
+  image: 'Dockerfile'
+  args:
+    - ${{ inputs.converter-version }}
+    - ${{ inputs.input-file }}

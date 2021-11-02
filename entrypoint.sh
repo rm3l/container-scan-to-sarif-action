@@ -1,0 +1,14 @@
+#!/bin/sh -l
+
+CONTAINER_SCAN_TO_SARIF_VERSION="$1"
+echo "Installing container-scan-to-sarif (version $CONTAINER_SCAN_TO_SARIF_VERSION)..."
+mkdir -p ~/var/opt/
+curl -L "https://github.com/rm3l/container-scan-to-sarif/releases/download/${CONTAINER_SCAN_TO_SARIF_VERSION}/container-scan-to-sarif_${CONTAINER_SCAN_TO_SARIF_VERSION}_Linux_x86_64.tar.gz" \
+        | tar zx -C /var/opt/
+      chmod +x /var/opt/container-scan-to-sarif
+
+echo "Now running container-scan-to-sarif..."
+INPUT="$2"
+OUTPUT_FILE="/var/opt/scanreport.sarif"
+/var/opt/container-scan-to-sarif -input "$INPUT" -output "$OUTPUT_FILE"
+echo "::set-output name=sarif-report-path::$OUTPUT_FILE"
