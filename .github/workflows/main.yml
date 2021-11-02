@@ -16,10 +16,10 @@ jobs:
 
       # Use the output from the `container-scan-to-sarif` step
       - name: Display the generated SARIF report
-        run: cat "${{ steps.container-scan-to-sarif.outputs.scan-report-path }}"
+        run: cat "${{ steps.container-scan-to-sarif.outputs.sarif-report-path }}"
 
       - name: Upload SARIF reports to GitHub Security tab
         uses: github/codeql-action/upload-sarif@v1
         if: ${{ always() }}
         with:
-          sarif_file: ${{ steps.container-scan-to-sarif.outputs.scan-report-path }}
+          sarif_file: ${{ steps.container-scan-to-sarif.outputs.sarif-report-path }}

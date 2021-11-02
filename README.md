@@ -42,5 +42,5 @@ Path to the SARIF report generated
   uses: github/codeql-action/upload-sarif@v1
   if: ${{ always() }}
   with:
-    sarif_file: ${{ steps.container-scan-to-sarif.outputs.scan-report-path }}
+    sarif_file: ${{ steps.container-scan-to-sarif.outputs.sarif-report-path }}
 ```
