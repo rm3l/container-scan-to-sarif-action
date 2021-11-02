@@ -5,6 +5,8 @@ jobs:
     runs-on: ubuntu-latest
     name: A job to convert Container Scan reports to SARIF
     steps:
+      - uses: actions/checkout@v2
+
       - name: container-scan-to-sarif action step
         id: container-scan-to-sarif
         uses: ./
