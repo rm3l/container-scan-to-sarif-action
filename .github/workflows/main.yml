@@ -12,7 +12,7 @@ jobs:
         uses: ./
         with:
           converter-version: 0.2.2
-          input-file: 'test-data/sample-container-scan-report.json'
+          input-file: ${{ github.workspace }}/test-data/sample-container-scan-report.json
 
       # Use the output from the `container-scan-to-sarif` step
       - name: Display the generated SARIF report
