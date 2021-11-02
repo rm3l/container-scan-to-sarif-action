@@ -8,13 +8,17 @@ inputs:
   input-file:
     description: 'Path to the input Container Scan report to convert'
     required: true
-    default: 'scanreport.json'
+  output-file:
+    description: 'Path to the output SARIF report to generate'
+    required: false
+    default: 'scanreport.sarif'
 outputs:
   sarif-report-path:
-    description: 'Path to the SARIF report generated'
+    description: 'Path to the SARIF report generated. Relative to the GitHub workspace'
 runs:
   using: 'docker'
   image: 'Dockerfile'
   args:
     - ${{ inputs.converter-version }}
     - ${{ inputs.input-file }}
+    - ${{ inputs.output-file }}

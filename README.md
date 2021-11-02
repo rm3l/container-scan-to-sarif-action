@@ -12,13 +12,17 @@ It uses the standalone converter excutable from [container-scan-to-sarif](https:
 
 ## `input-file`
 
-**Required** Path to the input Container Scan report to convert. Default `"scanreport.json"`
+**Required** Path to the input Container Scan report to convert.
+
+## `output-file`
+
+**Optional** Path to the output SARIF report to generate. Default `"scanreport.sarif"`
 
 ## Outputs
 
 ## `sarif-report-path`
 
-Path to the SARIF report generated
+Path to the SARIF report generated. Relative to the GitHub Workspace.
 
 ## Example usage
 

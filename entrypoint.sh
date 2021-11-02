@@ -9,6 +9,6 @@ chmod +x /var/opt/container-scan-to-sarif
 
 INPUT="$2"
 echo "Now running container-scan-to-sarif against file $INPUT..."
-OUTPUT_FILE="/var/opt/scanreport.sarif"
+OUTPUT_FILE="$2"
 /var/opt/container-scan-to-sarif -input "$INPUT" -output "$OUTPUT_FILE" || exit 1
 echo "::set-output name=sarif-report-path::$OUTPUT_FILE"
