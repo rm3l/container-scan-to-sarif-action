@@ -7,15 +7,21 @@ jobs:
     steps:
       - uses: actions/checkout@v2
 
+      - name: Scan sample image with Azure Container Scan
+        id: container-image-scan
+        uses: Azure/container-scan@v0.1
+        with:
+          image-name: debian:11
+
       - name: container-scan-to-sarif action step
         id: container-scan-to-sarif-step
+        if: ${{ always() }}
         uses: ./
         with:
           converter-version: 0.2.2
-          input-file: test-data/sample-container-scan-report.json
+          input-file: ${{ steps.container-image-scan.outputs.scan-report-path }}
 
-      - name: Display the generated SARIF report
-        run: cat "${{ steps.container-scan-to-sarif-step.outputs.sarif-report-path }}"
+      - run: cat "${{ steps.container-scan-to-sarif-step.outputs.sarif-report-path }}"
 
       - name: Upload SARIF reports to GitHub Security tab
         uses: github/codeql-action/upload-sarif@v1
