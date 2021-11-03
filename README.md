@@ -6,21 +6,21 @@ It uses the standalone converter excutable from [container-scan-to-sarif](https:
 
 ## Inputs
 
-## `converter-version`
+### `converter-version`
 
 **Optional** Version of the container-scan-to-sarif tool. See https://github.com/rm3l/container-scan-to-sarif/releases. Default `"0.2.2"`.
 
-## `input-file`
+### `input-file`
 
 **Required** Path to the input Container Scan report to convert.
 
-## `output-file`
+### `output-file`
 
 **Optional** Path to the output SARIF report to generate. Default `"scanreport.sarif"`
 
 ## Outputs
 
-## `sarif-report-path`
+### `sarif-report-path`
 
 Path to the SARIF report generated. Relative to the GitHub Workspace.
 
