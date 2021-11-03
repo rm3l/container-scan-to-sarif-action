@@ -35,7 +35,7 @@ Path to the SARIF report generated. Relative to the GitHub Workspace.
     
 - name: Convert Container Scan Report to SARIF
   id: scan-to-sarif
-  uses: actions/container-scan-to-sarif-action@v1
+  uses: rm3l/container-scan-to-sarif-action@v1.2.1
   if: ${{ always() }}
   with:
     converter-version: 0.2.2
