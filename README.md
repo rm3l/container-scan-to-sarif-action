@@ -22,7 +22,7 @@ It uses the standalone converter excutable from [container-scan-to-sarif](https:
 
 ### `sarif-report-path`
 
-Path to the SARIF report generated. Relative to the GitHub Workspace.
+Path to the SARIF report generated.
 
 ## Example usage
 

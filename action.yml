@@ -18,7 +18,7 @@ inputs:
     default: 'scanreport.sarif'
 outputs:
   sarif-report-path:
-    description: 'Path to the SARIF report generated. Relative to the GitHub workspace'
+    description: 'Path to the SARIF report generated'
     value: ${{ steps.scan-to-sarif.outputs.sarif-report-path }}
 runs:
   using: "composite"
