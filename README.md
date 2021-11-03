@@ -29,13 +29,12 @@ Path to the SARIF report generated. Relative to the GitHub Workspace.
 ```yaml
 - name: Scan Container Image
   id: scan
-  continue-on-error: true
   uses: Azure/container-scan@v0.1
   with:
     image-name: my-container-image
     
 - name: Convert Container Scan Report to SARIF
-  id: container-scan-to-sarif
+  id: scan-to-sarif
   uses: actions/container-scan-to-sarif-action@v1
   if: ${{ always() }}
   with:
@@ -46,5 +45,5 @@ Path to the SARIF report generated. Relative to the GitHub Workspace.
   uses: github/codeql-action/upload-sarif@v1
   if: ${{ always() }}
   with:
-    sarif_file: ${{ steps.container-scan-to-sarif.outputs.sarif-report-path }}
+    sarif_file: ${{ steps.scan-to-sarif.outputs.sarif-report-path }}
 ```
