@@ -19,10 +19,21 @@ inputs:
 outputs:
   sarif-report-path:
     description: 'Path to the SARIF report generated. Relative to the GitHub workspace'
+    value: ${{ steps.scan-to-sarif.outputs.sarif-report-path }}
 runs:
-  using: 'docker'
-  image: 'Dockerfile'
-  args:
-    - ${{ inputs.converter-version }}
-    - ${{ inputs.input-file }}
-    - ${{ inputs.output-file }}
+  using: "composite"
+  steps:
+    - id: container-scan-to-sarif-downloader
+      run: |
+        mkdir -p ~/.local/bin
+        curl -L "https://github.com/rm3l/container-scan-to-sarif/releases/download/${{ inputs.converter-version }}/container-scan-to-sarif_${{ inputs.converter-version }}_Linux_x86_64.tar.gz" \
+          | tar zx -C ~/.local/bin
+        chmod +x ~/.local/bin/container-scan-to-sarif
+      shell: bash
+    - id: scan-to-sarif
+      run: |
+        ~/.local/bin/container-scan-to-sarif \
+          -input "${{ inputs.input-file }}" \
+          -output "${{ inputs.output-file }}"
+        echo "::set-output name=sarif-report-path::${{ inputs.output-file }}"
+      shell: bash
