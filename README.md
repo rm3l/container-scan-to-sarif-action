@@ -8,7 +8,7 @@ It uses the standalone converter excutable from [container-scan-to-sarif](https:
 
 ### `converter-version`
 
-**Optional** Version of the container-scan-to-sarif tool. See https://github.com/rm3l/container-scan-to-sarif/releases. Default `"0.3.0"`.
+**Optional** Version of the container-scan-to-sarif tool. See https://github.com/rm3l/container-scan-to-sarif/releases. Default `"0.4.0"`.
 
 ### `input-file`
 
@@ -38,7 +38,7 @@ Path to the SARIF report generated.
   uses: rm3l/container-scan-to-sarif-action@v1
   if: ${{ always() }}
   with:
-    converter-version: 0.2.2
+    converter-version: 0.4.0
     input-file: ${{ steps.scan.outputs.scan-report-path }}
 
 - name: Upload SARIF reports to GitHub Security tab

@@ -3,7 +3,7 @@ on: [push]
 jobs:
   container-scan-to-sarif_job:
     runs-on: ubuntu-latest
-    name: A job to convert Container Scan reports to SARIF
+    name: Upload Container Scan Report to GitHub Code Scanning
     steps:
       - uses: actions/checkout@v2
 
@@ -19,7 +19,7 @@ jobs:
         if: ${{ always() }}
         uses: ./
         with:
-          converter-version: 0.2.2
+          converter-version: 0.4.0
           input-file: ${{ steps.container-image-scan.outputs.scan-report-path }}
 
       - run: cat "${{ steps.container-scan-to-sarif.outputs.sarif-report-path }}"
