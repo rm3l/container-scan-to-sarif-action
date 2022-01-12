@@ -27,7 +27,7 @@ runs:
       run: |
         mkdir -p ~/.local/bin
         curl -L "https://github.com/rm3l/container-scan-to-sarif/releases/download/${{ inputs.converter-version }}/container-scan-to-sarif_${{ inputs.converter-version }}_Linux_x86_64.tar.gz" \
-          | tar zx -C ~/.local/bin
+          | tar zx -C ~/.local/bin --strip-components=1
         chmod +x ~/.local/bin/container-scan-to-sarif
       shell: bash
     - id: scan-to-sarif
