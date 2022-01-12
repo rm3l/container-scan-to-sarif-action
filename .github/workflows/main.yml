@@ -12,14 +12,14 @@ jobs:
         continue-on-error: true
         uses: Azure/container-scan@v0.1
         with:
-          image-name: debian:11
+          image-name: "busybox:1.35.0"
 
       - name: Convert Container Scan Output to SARIF
         id: container-scan-to-sarif
         if: ${{ always() }}
         uses: ./
         with:
-          converter-version: 0.4.0
+          converter-version: 0.5.0
           input-file: ${{ steps.container-image-scan.outputs.scan-report-path }}
 
       - run: cat "${{ steps.container-scan-to-sarif.outputs.sarif-report-path }}"
