@@ -8,7 +8,7 @@ inputs:
   converter-version:
     description: 'Version of the container-scan-to-sarif tool. See https://github.com/rm3l/container-scan-to-sarif/releases'
     required: false
-    default: '0.5.0'
+    default: '0.6.0'
   input-file:
     description: 'Path to the input Container Scan report to convert'
     required: true
@@ -32,8 +32,15 @@ runs:
       shell: bash
     - id: scan-to-sarif
       run: |
-        ~/.local/bin/container-scan-to-sarif \
-          -input "${{ inputs.input-file }}" \
-          -output "${{ inputs.output-file }}"
+        # Versions >= 0.6.0 directly output the resulting SARIF to the standard output
+        if ~/.local/bin/container-scan-to-sarif --help | grep 'output string' > /dev/null; then \
+          ~/.local/bin/container-scan-to-sarif \
+            -input "${{ inputs.input-file }}" \
+            -output "${{ inputs.output-file }}"; \
+        else; \
+          ~/.local/bin/container-scan-to-sarif \
+            -input "${{ inputs.input-file }}" \
+          | tee "${{ inputs.output-file }}"; \
+        fi
         echo "::set-output name=sarif-report-path::${{ inputs.output-file }}"
       shell: bash

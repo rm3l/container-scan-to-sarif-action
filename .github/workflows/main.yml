@@ -19,7 +19,7 @@ jobs:
         if: ${{ always() }}
         uses: ./
         with:
-          converter-version: 0.5.0
+          converter-version: 0.6.0
           input-file: ${{ steps.container-image-scan.outputs.scan-report-path }}
 
       - run: cat "${{ steps.container-scan-to-sarif.outputs.sarif-report-path }}"
