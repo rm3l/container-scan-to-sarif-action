@@ -32,12 +32,13 @@ runs:
       shell: bash
     - id: scan-to-sarif
       run: |
-        # Versions >= 0.6.0 directly output the resulting SARIF to the standard output
+        # Converter versions >= 0.6.0 dropped support for the "-output" CLI option.
+        # Instead, they directly write the resulting SARIF to the standard output
         if ~/.local/bin/container-scan-to-sarif --help | grep 'output string' > /dev/null; then \
           ~/.local/bin/container-scan-to-sarif \
             -input "${{ inputs.input-file }}" \
             -output "${{ inputs.output-file }}"; \
-        else; \
+        else \
           ~/.local/bin/container-scan-to-sarif \
             -input "${{ inputs.input-file }}" \
           | tee "${{ inputs.output-file }}"; \
