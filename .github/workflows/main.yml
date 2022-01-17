@@ -19,7 +19,6 @@ jobs:
         if: ${{ always() }}
         uses: ./
         with:
-          converter-version: 0.6.0
           input-file: ${{ steps.container-image-scan.outputs.scan-report-path }}
 
       - name: Upload SARIF reports to GitHub Security tab
