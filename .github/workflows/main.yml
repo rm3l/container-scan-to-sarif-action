@@ -5,7 +5,7 @@ jobs:
     runs-on: ubuntu-latest
     name: Upload Container Scan Report to GitHub Code Scanning
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
 
       - name: Scan sample image with Azure Container Scan
         id: container-image-scan
