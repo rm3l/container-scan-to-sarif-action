@@ -1,9 +1,15 @@
-on: [push]
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
 
 jobs:
   container-scan-to-sarif_job:
     runs-on: ubuntu-latest
     name: Upload Container Scan Report to GitHub Code Scanning
+    permissions:
+      security-events: write
     steps:
       - uses: actions/checkout@v3
 
@@ -22,7 +28,7 @@ jobs:
           input-file: ${{ steps.container-image-scan.outputs.scan-report-path }}
 
       - name: Upload SARIF reports to GitHub Security tab
-        uses: github/codeql-action/upload-sarif@v1
+        uses: github/codeql-action/upload-sarif@v2
         if: ${{ always() }}
         with:
           sarif_file: ${{ steps.container-scan-to-sarif.outputs.sarif-report-path }}
