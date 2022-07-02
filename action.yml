@@ -8,7 +8,7 @@ inputs:
   converter-version:
     description: 'Version of the container-scan-to-sarif tool. See https://github.com/rm3l/container-scan-to-sarif/releases'
     required: false
-    default: '0.7.1'
+    default: '0.7.3'
   input-file:
     description: 'Path to the input Container Scan report to convert'
     required: true
