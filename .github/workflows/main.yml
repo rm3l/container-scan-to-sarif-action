@@ -1,9 +1,15 @@
-on: [push]
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
 
 jobs:
   container-scan-to-sarif_job:
     runs-on: ubuntu-latest
     name: Upload Container Scan Report to GitHub Code Scanning
+    permissions:
+      security-events: write
     steps:
       - uses: actions/checkout@v3
 
